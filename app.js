@@ -16,5 +16,19 @@ score =[0,0];
 roundScore=0;
 activePlayer = 0 //0 -> Player 1 & 1-> Player 2
 
+//dice logic 
 dice = Math.floor(Math.random()*6)+1;
-console.log(dice);
+
+//setting current score
+document.querySelector('#current-'+activePlayer).textContent=dice;
+
+//getting global score
+var x = document.querySelector('#score-'+activePlayer).textContent;
+
+console.log(x);
+
+//at beggining of game hide dice
+document.querySelector('.dice').style.display='none';     
+
+
+
