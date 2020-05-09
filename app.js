@@ -1,4 +1,11 @@
 /*
+Code by  : Shahid Dhariwala
+LinkedIn : https://www.linkedin.com/in/shahiddhariwala/
+Twitter  : https://twitter.com/shahiddhariwala
+Date     : 09-May-2020
+*/
+
+/*
 GAME RULES:
 
 - The game has 2 players, playing in rounds
@@ -11,13 +18,14 @@ GAME RULES:
 
 var scores;
 var roundScore;
+var gamePlaying;
 
-//Initialse the scores
+//Initialse the game
 function init() {
     scores = [0, 0];
     roundScore = 0;
     activePlayer = 0 //0 -> Player 1 & 1-> Player 2
-
+    gamePlaying = true;
     //at beggining of game hide dice
     document.querySelector('.dice').style.display = 'none';
 
@@ -29,9 +37,6 @@ function init() {
     document.getElementById('name-0').textContent = 'Player 1';
     document.getElementById('name-1').textContent = 'Player 2';
 
-    //UnHide buttons 
-    document.querySelector('.btn-roll').style.display = 'block';
-    document.querySelector('.btn-hold').style.display = 'block';
 
     //remove the winner class
     document.querySelector('.player-' + 0 + '-panel').classList.remove('winner');
@@ -54,24 +59,27 @@ init();
 document.querySelector('.btn-roll').addEventListener('click', function () {
     //its anonymouse function
 
-    //1. Get Random Number for dice
-    //dice logic 
-    var dice = Math.floor(Math.random() * 6) + 1;
+    //if game playing true
+    if (gamePlaying) {
+        //1. Get Random Number for dice
+        //dice logic 
+        var dice = Math.floor(Math.random() * 6) + 1;
 
-    //2 Display the result
-    var diceDOM = document.querySelector('.dice');
-    diceDOM.style.display = 'block';
-    diceDOM.src = 'dice-' + dice + '.png';
+        //2 Display the result
+        var diceDOM = document.querySelector('.dice');
+        diceDOM.style.display = 'block';
+        diceDOM.src = 'dice-' + dice + '.png';
 
-    //3. Update the round score if the rolled number was not a 1
-    if (dice !== 1) {
-        //add score
-        roundScore += dice;
-        document.querySelector('#current-' + activePlayer).textContent = roundScore;
-    }
-    else {
-        //Next Player
-        nextPlayer();
+        //3. Update the round score if the rolled number was not a 1
+        if (dice !== 1) {
+            //add score
+            roundScore += dice;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        }
+        else {
+            //Next Player
+            nextPlayer();
+        }
     }
 });
 
@@ -79,32 +87,31 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 //button hold
 
 document.querySelector('.btn-hold').addEventListener('click', function () {
-    //1. Add Current Score to Global Score
-    scores[activePlayer] += roundScore;
 
-    //2. Update the UI
-    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    //if game playing true
+    if (gamePlaying) {
+        //1. Add Current Score to Global Score
+        scores[activePlayer] += roundScore;
 
-
-    //3. Check if player won? 
-    if (scores[activePlayer] >= 20) {
-
-        //Declare Winner
-        document.getElementById('name-' + activePlayer).textContent = 'Winner!';
-        document.querySelector('.dice').style.display = 'none';
-        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+        //2. Update the UI
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
 
-        //Hide buttons 
-        document.querySelector('.btn-roll').style.display = 'none';
-        document.querySelector('.btn-hold').style.display = 'none';
+        //3. Check if player won? 
+        if (scores[activePlayer] >= 100) {
+
+            //Declare Winner
+            document.getElementById('name-' + activePlayer).textContent = 'Winner!';
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+            gamePlaying = false;
+        }
+        else {
+            //4. Next Player
+            nextPlayer();
+        }
     }
-    else {
-        //4. Next Player
-        nextPlayer();
-    }
-
 });
 
 
