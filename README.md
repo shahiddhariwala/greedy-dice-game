@@ -10,3 +10,6 @@
 +  A player looses his ENTIRE score when he rolls two 6 in a row. After that, it's the next player's turn.
 +  Adding an input field to the HTML where players can set the winning score, so that they can change the predefined score of 100.
 +  Adding another dice to the game, so that there are two dices now. The player looses his current score when one of them is a 1.
+
+
+![image](https://user-images.githubusercontent.com/32133607/81478534-cab7f280-923b-11ea-9f5a-75252eb7ee21.png)
