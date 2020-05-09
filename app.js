@@ -12,23 +12,41 @@ GAME RULES:
 var score;
 var roundScore;
 
-score =[0,0];
-roundScore=0;
+score = [0, 0];
+roundScore = 0;
 activePlayer = 0 //0 -> Player 1 & 1-> Player 2
 
-//dice logic 
-dice = Math.floor(Math.random()*6)+1;
-
-//setting current score
-document.querySelector('#current-'+activePlayer).textContent=dice;
-
-//getting global score
-var x = document.querySelector('#score-'+activePlayer).textContent;
-
-console.log(x);
 
 //at beggining of game hide dice
-document.querySelector('.dice').style.display='none';     
+document.querySelector('.dice').style.display = 'none';
+
+document.getElementById('score-0').textContent='0';
+document.getElementById('score-1').textContent='0';
+document.getElementById('current-0').textContent='0';
+document.getElementById('current-1').textContent='0';
+
+//btn-roll adding event listener to this button
+document.querySelector('.btn-roll').addEventListener('click', function () {
+    //its anonymouse function
+
+    //1. Get Random Number for dice
+    //dice logic 
+    var dice = Math.floor(Math.random() * 6) + 1;
+
+    //2 Display the result
+    var diceDOM = document.querySelector('.dice');
+    diceDOM.style.display = 'block';
+    diceDOM.src = 'dice-'+dice+'.png';
+
+    //3. Update the round score if the rolled number was not a 1
+
+});
 
 
+/* //setting current score
+document.querySelector('#current-' + activePlayer).textContent = dice;
 
+//getting global score
+var x = document.querySelector('#score-' + activePlayer).textContent;
+
+console.log(x); */
